@@ -1,0 +1,92 @@
+:root{
+	--primary:#fff;
+	--secondary:#eee;
+	
+	--font-color:#626262;
+	--box-shadow:#d5d5d5;
+}
+
+body {
+	margin:0;
+	padding:0;
+	background:var(--secondary);
+	font-family:'arial',sans-serif;
+}
+
+* {
+	-webkit-transition-duration:0.2s;
+	-moz-transition-duration:0.2s;
+	-o-transition-duration:0.2s;
+	transition-duration:0.2s;
+}
+
+*:hover {
+	-webkit-transition-duration:0s;
+	-moz-transition-duration:0s;
+	-o-transition-duration:0s;
+	transition-duration:0s;
+}
+
+li {
+	list-style:none;
+}
+
+.mainContainer {
+	width: 1200px;
+	margin: 10em auto;
+	min-height: 100px;
+	padding:10px;
+	
+	background: var(--primary);
+	box-shadow: 0 0 2em var(--box-shadow);
+	border-radius: 10px;
+}
+
+nav {
+	width:100%;
+	position:fixed;
+	top:0;
+	background: var(--primary);
+	box-shadow: 0 0 2em var(--box-shadow);
+}
+
+nav a {
+	text-decoration:none;
+}
+
+nav > .navContainer {
+	width:1200px;
+	margin: 0 auto;
+	justify-content:space-between;
+}
+
+nav > .navContainer > ul > li { display:inline-block; }
+nav > .navContainer > ul > li > a { 
+	display:block;
+	padding: 10px 20px;
+	margin-right: 5px;
+	color: var(--font-color);
+	border-radius: 5px;
+	font-weight:bold;
+}
+
+nav > .navContainer > ul > li > a:hover {
+	background: var(--secondary);
+}
+
+nav > .navContainer > .navMain,
+nav > .navContainer > .navAccount {
+	width:40%;
+}
+
+nav > .navContainer,
+nav > .navContainer > .navAccount {
+	display:flex;
+}
+
+nav > .navContainer > .navAccount {
+	justify-content: right;
+}
+
+.pull-left { float:left; }
+.pull-right { float:right; }
