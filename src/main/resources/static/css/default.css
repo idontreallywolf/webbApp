@@ -3,6 +3,7 @@
 	--secondary: #1b2331;
 	--font-color: #9daece;
 	--box-shadow: #0f1726;
+	--highlight: #5d9100;
 }
 
 body {
@@ -10,6 +11,7 @@ body {
 	padding:0;
 	background:var(--secondary);
 	font-family:'arial',sans-serif;
+    color: var(--font-color);
 }
 
 * {
@@ -47,6 +49,7 @@ nav {
 	top:0;
 	background: var(--primary);
 	box-shadow: 0 0 2em var(--box-shadow);
+    border-bottom: 5px solid var(--highlight);
 }
 
 nav a {
