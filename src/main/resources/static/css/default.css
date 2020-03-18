@@ -1,9 +1,8 @@
 :root{
-	--primary:#fff;
-	--secondary:#eee;
-	
-	--font-color:#626262;
-	--box-shadow:#d5d5d5;
+	--primary: #29354a;
+	--secondary: #1b2331;
+	--font-color: #9daece;
+	--box-shadow: #0f1726;
 }
 
 body {
