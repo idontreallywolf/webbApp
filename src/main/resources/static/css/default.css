@@ -1,9 +1,13 @@
 :root{
 	--primary: #29354a;
 	--secondary: #1b2331;
-	--font-color: #9daece;
+    --secondary-alt: #232d40;
+
+    --font-color: #9daece;
 	--box-shadow: #0f1726;
+
 	--highlight: #5d9100;
+    --highlight-alt: #aa9800;
 }
 
 body {
@@ -32,12 +36,16 @@ li {
 	list-style:none;
 }
 
+a:hover, .button:hover, input[type="submit"]:hover {
+    cursor: pointer;
+}
+
 .mainContainer {
 	width: 1200px;
 	margin: 10em auto;
 	min-height: 100px;
 	padding:10px;
-	
+
 	background: var(--primary);
 	box-shadow: 0 0 2em var(--box-shadow);
 	border-radius: 10px;
@@ -50,6 +58,7 @@ nav {
 	background: var(--primary);
 	box-shadow: 0 0 2em var(--box-shadow);
     border-bottom: 5px solid var(--highlight);
+    z-index: 10;
 }
 
 nav a {
@@ -63,13 +72,15 @@ nav > .navContainer {
 }
 
 nav > .navContainer > ul > li { display:inline-block; }
-nav > .navContainer > ul > li > a { 
-	display:block;
+nav > .navContainer > ul > li > a {
 	padding: 10px 20px;
 	margin-right: 5px;
 	color: var(--font-color);
 	border-radius: 5px;
 	font-weight:bold;
+}
+nav > .navContainer > ul > li > a, .button {
+	display:block;
 }
 
 nav > .navContainer > ul > li > a:hover {
@@ -92,3 +103,4 @@ nav > .navContainer > .navAccount {
 
 .pull-left { float:left; }
 .pull-right { float:right; }
+.hidden { display: none; visibility: hidden; opacity: 0; }

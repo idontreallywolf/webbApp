@@ -1,0 +1,19 @@
+<div class="loginContainer" th:fragment="login">
+    <form class="loginForm" method="post">
+        <div class="formHeader">
+            Register Account <i class="fa fa-id-card"></i>
+        </div>
+
+        <input type="text" name="fname" placeholder="Firstname">
+        <input type="text" name="lname" placeholder="Lastname">
+        <input type="text" name="uname" placeholder="Username">
+        <input type="text" name="password" placeholder="password">
+        <input type="password" name="password" placeholder="Confirm password">
+        <input type="email" name="email" placeholder="email@abc.xyz">
+
+        <div class="hidden">
+            <input type="submit" name="submit" value="Sign in">
+        </div>
+        <a class="button loginButton">Create my account <i class="fa fa-sign-in"></i></a>
+    </form>
+</div>
