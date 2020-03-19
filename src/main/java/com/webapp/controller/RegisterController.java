@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webapp.Config;
+import com.webapp.dao.AccountDao;
 import com.webapp.model.Account;
 import com.webapp.model.RegisterForm;
 
 @Controller
 public class RegisterController extends PageController implements PageControllerInterface {
+
+    @Autowired
+	AccountDao accDao;
 
     @GetMapping("/register")
     public ModelAndView run(){
@@ -89,7 +94,8 @@ public class RegisterController extends PageController implements PageController
         if (m.find())
             errors.add("err#sym");
 
-        // TODO: check if username is already in use
+        if(accDao.getAccountByUsername(uname) != null)
+            errors.add("err#taken");
 
         return errors;
     }
@@ -157,6 +163,9 @@ public class RegisterController extends PageController implements PageController
 
         if (!m.find())
             errors.add("err#inv");
+
+        if(accDao.getAccountByEmail(email) != null)
+            errors.add("err#taken");
 
         return errors;
     }
