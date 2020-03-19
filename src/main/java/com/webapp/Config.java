@@ -38,7 +38,7 @@ public class Config {
 	}
 
 	@Bean
-	public AccountDao getEmployeeDao() {
+	public AccountDao getAccountDao() {
 		return new AccountDaoImpl(getDataSource());
 	}
 }
