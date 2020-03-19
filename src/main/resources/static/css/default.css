@@ -71,6 +71,10 @@ nav > .navContainer {
 	justify-content:space-between;
 }
 
+nav > .navContainer > ul {
+    margin: 10px 0px;
+}
+
 nav > .navContainer > ul > li { display:inline-block; }
 nav > .navContainer > ul > li > a {
 	padding: 10px 20px;

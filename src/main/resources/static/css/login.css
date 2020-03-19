@@ -18,7 +18,7 @@
     width: 400px;
     min-height: 250px;
     padding: 10px;
-    background: var(--primary);
+    background: linear-gradient(var(--secondary), var(--primary));
     border: 5px solid var(--secondary-alt);
     border-bottom-color: var(--box-shadow);
     border-right-color: var(--box-shadow);
