@@ -15,8 +15,6 @@ public class Config {
 	public static String mainTitle = "PepeSite";
 	public static String rootDir = System.getProperty("user.dir");
 	
-	private String host = "127.0.0.1";
-
 	private static class Database {
 		private static String host = "127.0.0.1";
 		private static String user = "root";
