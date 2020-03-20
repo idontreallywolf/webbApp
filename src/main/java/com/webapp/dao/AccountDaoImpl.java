@@ -117,4 +117,10 @@ public class AccountDaoImpl implements AccountDao {
 		return accounts;
 	}
 
+	@Override
+	public void registerAccount(String firstname, String lastname, String username, String password, String email) {
+        String sqlInsertQuery = "INSERT INTO `accounts`(`firstname`,`lastname`,`username`,`password`,`email`) VALUES(?, ?, ?, ?, ?)";
+		dbh.update(sqlInsertQuery, firstname, lastname, username, password, email);
+	}
+
 }

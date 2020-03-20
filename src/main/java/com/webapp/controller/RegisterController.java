@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,8 @@ public class RegisterController extends PageController implements PageController
 
     @Autowired
 	AccountDao accDao;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
     public ModelAndView run(){
@@ -38,11 +41,28 @@ public class RegisterController extends PageController implements PageController
     public Map<String, List<String>> registerAccount(@RequestBody RegisterForm regForm){
         Map<String, List<String>> errors = new HashMap<String, List<String>>();
 
-        errors.put("firstname", validateName(regForm.getFirstname()));
-        errors.put("lastname",  validateName(regForm.getLastname()));
-        errors.put("username",  validateUsername(regForm.getUsername()));
-        errors.put("password",  validatePassword(regForm.getPassword(), regForm.getPasswordConfirm()));
-        errors.put("email",     validateEmail(regForm.getEmail()));
+        int errorsFound = 0;
+
+        String firstname = regForm.getFirstname();
+        String lastname = regForm.getLastname();
+        String username = regForm.getUsername();
+        String password = regForm.getPassword();
+        String passwordConfirm = regForm.getPasswordConfirm();
+        String email = regForm.getEmail();
+
+        errors.put("firstname", validateName(firstname));
+        errors.put("lastname",  validateName(lastname));
+        errors.put("username",  validateUsername(username));
+        errors.put("password",  validatePassword(password, passwordConfirm));
+        errors.put("email",     validateEmail(email));
+
+        for(Map.Entry<String, List<String>> entry : errors.entrySet()) {
+        	if(entry.getValue().size() > 0)
+        		errorsFound += entry.getValue().size();
+        }
+
+        if(errorsFound == 0)
+        	accDao.registerAccount(firstname, lastname, username, passwordEncoder.encode(password), email);
 
         return errors;
     }
