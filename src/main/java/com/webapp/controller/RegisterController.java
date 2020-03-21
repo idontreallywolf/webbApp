@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,7 +33,14 @@ public class RegisterController extends PageController implements PageController
 	PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
-    public ModelAndView run(){
+    public ModelAndView run(HttpSession session, HttpServletResponse hsRes){
+    	
+    	// Redirect user if a session is already set.
+    	if(session.getAttribute("sessID") != null) {
+    		hsRes.setHeader("location", "/");
+    		hsRes.setStatus(302);
+    	}
+    	
         ModelAndView mv = new ModelAndView("index");
         mv = initDefaultAttributes("Register Account", "login.css", "register", mv);
         return mv;
@@ -38,31 +48,21 @@ public class RegisterController extends PageController implements PageController
 
     @PostMapping("/register")
     @ResponseBody
-    public Map<String, List<String>> registerAccount(@RequestBody RegisterForm regForm){
-        Map<String, List<String>> errors = new HashMap<String, List<String>>();
+    public Map<String, String> registerAccount(@RequestBody RegisterForm regForm, HttpSession session){
+    	Map<String, String> errors = new HashMap<String, String>();
+    	
+    	System.out.println("SESSID = "+session.getAttribute("sessID"));
+    	if(session.getAttribute("sessID") != null) {
+    		System.out.println("SESSION EXISTS ???");
+    		errors.put("error", "err#sess");
+    		return errors;
+    	}
 
-        int errorsFound = 0;
-
-        String firstname = regForm.getFirstname();
-        String lastname = regForm.getLastname();
-        String username = regForm.getUsername();
-        String password = regForm.getPassword();
-        String passwordConfirm = regForm.getPasswordConfirm();
-        String email = regForm.getEmail();
-
-        errors.put("firstname", validateName(firstname));
-        errors.put("lastname",  validateName(lastname));
-        errors.put("username",  validateUsername(username));
-        errors.put("password",  validatePassword(password, passwordConfirm));
-        errors.put("email",     validateEmail(email));
-
-        for(Map.Entry<String, List<String>> entry : errors.entrySet()) {
-        	if(entry.getValue().size() > 0)
-        		errorsFound += entry.getValue().size();
-        }
-
-        if(errorsFound == 0)
-        	accDao.registerAccount(firstname, lastname, username, passwordEncoder.encode(password), email);
+        errors.put("firstname", validateName(regForm.getFirstname()));
+        errors.put("lastname",  validateName(regForm.getLastname()));
+        errors.put("username",  validateUsername(regForm.getUsername()));
+        errors.put("password",  validatePassword(regForm.getPassword(), regForm.getPasswordConfirm()));
+        errors.put("email",     validateEmail(regForm.getEmail()));
 
         return errors;
     }
@@ -72,9 +72,9 @@ public class RegisterController extends PageController implements PageController
     *	Validates names
     * 	@param name
     *
-    *	@return a List<String> of errors ( if any. Otherwise an empty list )
+    *	@return a String representation of a List<String> containing errors ( if any. Otherwise an empty [string] )
     * */
-    public List<String> validateName(String name){
+    public String validateName(String name){
         List<String> errors = new ArrayList<String>();
 
         if(name.length() < Config.Account.minNameLength)
@@ -89,7 +89,7 @@ public class RegisterController extends PageController implements PageController
         if (m.find())
             errors.add("err#sym");
 
-        return errors;
+        return errors.toString();
     }
 
 
@@ -97,9 +97,9 @@ public class RegisterController extends PageController implements PageController
     *   Validates the username
     *
     *   @param uname - username to be validated
-    *   @return a List<String> of errors ( if any. Otherwise an empty list )
+    *   @return a String representation of a List<String> containing errors ( if any. Otherwise an empty [string] )
     */
-    public List<String> validateUsername(String uname){
+    public String validateUsername(String uname){
         List<String> errors = new ArrayList<String>();
 
         if(uname.length() < Config.Account.minUnameLength)
@@ -117,16 +117,16 @@ public class RegisterController extends PageController implements PageController
         if(accDao.getAccountByUsername(uname) != null)
             errors.add("err#taken");
 
-        return errors;
+        return errors.toString();
     }
 
     /**
     *   Validates password
     *
     *   @param password
-    *   @return  a List<String> of errors ( if any. Otherwise an empty list )
+    *   @return a String representation of a List<String> containing errors ( if any. Otherwise an empty [string] )
     */
-    public List<String> validatePassword(String password, String passwordConfirm) {
+    public String validatePassword(String password, String passwordConfirm) {
         List<String> errors = new ArrayList<String>();
 
         if(!password.equals(passwordConfirm))
@@ -160,16 +160,16 @@ public class RegisterController extends PageController implements PageController
         if(!lowerCase || !upperCase || !isDigit)
             errors.add("err#badSec");
 
-        return errors;
+        return errors.toString();
     }
 
     /**
     *   Validates email
     *
     *   @param email
-    *   @return  a List<String> of errors ( if any. Otherwise an empty list )
+    *   @return a String representation of a List<String> containing errors ( if any. Otherwise an empty [string] )
     */
-    public List<String> validateEmail(String email) {
+    public String validateEmail(String email) {
         List<String> errors = new ArrayList<String>();
 
         if(email.length() < Config.Account.minEmailLength)
@@ -187,6 +187,6 @@ public class RegisterController extends PageController implements PageController
         if(accDao.getAccountByEmail(email) != null)
             errors.add("err#taken");
 
-        return errors;
+        return errors.toString();
     }
 }
