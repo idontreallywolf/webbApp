@@ -40,15 +40,22 @@ a:hover, .button:hover, input[type="submit"]:hover {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+    color: var(--highlight-alt);
+}
+
+a.category {color:inherit;}
+a.category:hover {color:var(--highlight-alt);}
+
 .mainContainer {
-	width: 1200px;
+	width: 1300px;
 	margin: 10em auto;
 	min-height: 100px;
 	padding:10px;
 
 	background: var(--primary);
 	box-shadow: 0 0 2em var(--box-shadow);
-	border-radius: 10px;
 }
 
 nav {
@@ -68,7 +75,6 @@ nav a {
 nav > .navContainer {
 	width:1200px;
 	margin: 0 auto;
-	justify-content:space-between;
 }
 
 nav > .navContainer > ul {
@@ -106,9 +112,23 @@ nav > .navContainer > .navAccount {
 	justify-content: right;
 }
 
+.mainContainer, nav > .navContainer {
+    justify-content: space-between;
+}
+
+nav > .navContainer {
+    justify-content: left;
+}
+
 .pull-left { float:left; }
 .pull-right { float:right; }
 .hidden { display: none; visibility: hidden; opacity: 0; }
+
+.mainFeed {
+    width: 80%;
+    padding-left: 10px;
+}
+
 .categories {
     width: 20%;
 }
@@ -130,3 +150,20 @@ nav > .navContainer > .navAccount {
     padding-left: 8px;
 }
 
+.postTitle,
+.postBody,
+.postFooter {
+    padding: 5px;
+}
+
+.postTitle {
+    font-size: 1.2em;
+    background: var(--secondary-alt);
+}
+
+.postContainer {
+    width: 500px;
+    border: 1px solid var(--secondary-alt);
+    border-radius: 5px;
+    margin-bottom: 2em;
+}
