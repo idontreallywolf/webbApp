@@ -51,7 +51,6 @@ public class RegisterController extends PageController implements PageController
     public Map<String, String> registerAccount(@RequestBody RegisterForm regForm, HttpSession session){
     	Map<String, String> errors = new HashMap<String, String>();
     	
-    	System.out.println("SESSID = "+session.getAttribute("sessID"));
     	if(session.getAttribute("sessID") != null) {
     		System.out.println("SESSION EXISTS ???");
     		errors.put("error", "err#sess");
