@@ -97,7 +97,8 @@ nav > .navContainer > .navAccount {
 }
 
 nav > .navContainer,
-nav > .navContainer > .navAccount {
+nav > .navContainer > .navAccount,
+.mainContainer, .category {
 	display:flex;
 }
 
@@ -108,3 +109,24 @@ nav > .navContainer > .navAccount {
 .pull-left { float:left; }
 .pull-right { float:right; }
 .hidden { display: none; visibility: hidden; opacity: 0; }
+.categories {
+    width: 20%;
+}
+
+.category {
+    padding: 2px 5px;
+}
+.category:hover {
+    background: var(--secondary);
+}
+
+.categoryImg {
+    font-size: 25px;
+}
+
+.categoryName {
+    display: inherit;
+    align-items: center;
+    padding-left: 8px;
+}
+
