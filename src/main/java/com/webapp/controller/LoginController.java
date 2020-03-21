@@ -42,14 +42,19 @@ public class LoginController extends PageController implements PageControllerInt
     	
     	// compare passwords
     	if(passwordEncoder.matches(loginFormInfo.getPassword(), acc.getPassword())) {
-    		session.setAttribute("sessID", acc.getId());
-    		session.setAttribute("username", acc.getUsername());
+    		setSession(acc, session);
     	}
-    	
-    	System.out.println("SESSION_ID: "+session.getAttribute("sessID"));
-    	System.out.println("USERNAME: "+session.getAttribute("username"));
 
         return new ResponseObject("Uknown username or password");
+    }
+    
+    private void setSession(Account acc, HttpSession session) {
+		session.setAttribute("sessID", acc.getId());
+		session.setAttribute("username", acc.getUsername());
+		session.setAttribute("firstname", acc.getUsername());
+		session.setAttribute("lastname", acc.getUsername());
+		session.setAttribute("username", acc.getUsername());
+		// TODO: user Roles
     }
 
 }
