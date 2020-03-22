@@ -10,6 +10,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.webapp.dao.AccountDao;
 import com.webapp.dao.AccountDaoImpl;
+import com.webapp.dao.Dao;
+import com.webapp.dao.PostDao;
+import com.webapp.dao.PostDaoImpl;
+import com.webapp.model.Post;
 
 @Configuration
 @ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao" })
@@ -29,7 +33,7 @@ public class Config {
 
         public static int minPassLength = 8;
         public static int maxPassLength = 60;
-        
+
         public static int minEmailLength = 6;
     }
 
@@ -62,10 +66,17 @@ public class Config {
 		return ds;
 	}
 
-	@Bean
-	public AccountDao getAccountDao() {
-		return new AccountDaoImpl(getDataSource());
-	}
+	
+    @Bean
+    public AccountDao getAccDao() {
+    	return new AccountDaoImpl(getDataSource());
+    }
+    
+    @Bean
+    public PostDao getPostDao() {
+    	return new PostDaoImpl(getDataSource());
+    }
+    
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

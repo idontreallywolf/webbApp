@@ -1,5 +1,10 @@
 <div class="mainContainer" th:fragment="profile">
-	<div>
-		Profile
-	</div>
+    <div class="">
+        <h2>Profile</h2>
+    </div>
+    <div th:if="${posts.size() > 0}" th:each="post : ${posts}" class="postContainer">
+        <div class="postTitle" th:text="${post.title}"></div>
+        <div class="postBody" th:text="${post.content}"></div>
+        <div class="postFooter" th:text="Footer"></div>
+    </div>
 </div>

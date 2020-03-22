@@ -6,20 +6,16 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.converter.feed.RssChannelHttpMessageConverter;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.webapp.model.Account;
 
-public class AccountDaoImpl implements AccountDao {
-
-	private JdbcTemplate dbh;
+public class AccountDaoImpl extends Dao implements AccountDao {
 
 	public AccountDaoImpl(DataSource ds) {
-		dbh = new JdbcTemplate(ds);
+		super(ds);
 	}
 
     /**

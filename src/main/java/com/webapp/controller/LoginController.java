@@ -21,6 +21,7 @@ public class LoginController extends PageController implements PageControllerInt
 
     @Autowired
     AccountDao accDao;
+    
     @Autowired
     PasswordEncoder passwordEncoder;
 
