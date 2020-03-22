@@ -13,13 +13,17 @@
 		<nav>
 			<div class="navContainer">
 				<ul class="navMain">
-					<li><a href="/"/>Home <i class="fa fa-home"></i></a></li>
+					<li><a href="/">Home <i class="fa fa-home"></i></a></li>
 				</ul>
 
-				<ul class="navAccount">
-					<li><a href="/login"/><i class="fa fa-key"></i> Sign in</a></li>
-					<li><a href="/register"/><i class="fa fa-id-card"></i> Create Account</a></li>
+				<ul class="navAccount" th:if="${session.sessID == null}">
+					<li><a href="/login"><i class="fa fa-key"></i> Sign in</a></li>
+					<li><a href="/register"><i class="fa fa-id-card"></i> Create Account</a></li>
 				</ul>
+
+                <ul class="navAccount" th:if="${session.sessID != null}">
+                    <li><a th:href="@{'/profile/' + ${session.sessID}}"><i class="fa fa-user"></i> My Profile</a></li>
+                </ul>
 			</div>
 		</nav>
 
