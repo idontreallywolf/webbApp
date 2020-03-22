@@ -9,12 +9,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProfileController extends PageController implements PageControllerInterface {
-    
+
     @GetMapping("/profile")
-	public ModelAndView run(HttpSession session, HttpServletResponse hsRes) {
-		ModelAndView mv = new ModelAndView("index");
+    public ModelAndView run(HttpSession session, HttpServletResponse hsRes) {
+
+        // Redirect user if there's no active session
+        if(session.getAttribute("sessID") == null) {
+            hsRes.setHeader("location", "/");
+            hsRes.setStatus(302);
+            return null;
+        }
+
+        ModelAndView mv = new ModelAndView("index");
         mv = initDefaultAttributes("Profile", null, "profile", mv);
-		return mv;
-	}
+        return mv;
+    }
 
 }
