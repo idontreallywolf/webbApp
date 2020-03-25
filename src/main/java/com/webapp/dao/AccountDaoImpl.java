@@ -119,4 +119,34 @@ public class AccountDaoImpl extends Dao implements AccountDao {
 		dbh.update(sqlInsertQuery, firstname, lastname, username, password, email);
 	}
 
+	@Override
+	public Account getAccountById(int id) {
+		Object[] params = {id};
+
+        try {
+            Account account = dbh.queryForObject("SELECT * FROM `accounts` WHERE `id` = ?", params, new RowMapper<Account>() {
+
+                @Override
+                public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    try {
+                        Account acc = new Account();
+                        acc.setId(rs.getInt("id"));
+                        acc.setFirstname(rs.getString("firstname"));
+                        acc.setLastname(rs.getString("lastname"));
+                        acc.setUsername(rs.getString("username"));
+                        acc.setPassword(rs.getString("password"));
+                        acc.setEmail(rs.getString("email"));
+                        return acc;
+                    } catch(SQLException e) {
+                        System.err.println("["+e.getErrorCode()+"] "+e.getMessage());
+                        return null;
+                    }
+                }
+            });
+            return account;
+        } catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+	}
+
 }
