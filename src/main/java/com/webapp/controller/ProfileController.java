@@ -27,7 +27,7 @@ public class ProfileController extends PageController implements PageControllerI
         }
 
         ModelAndView mv = new ModelAndView("index");
-        mv = initDefaultAttributes("Profile", null, "profile", mv);
+        mv = initDefaultAttributes("Profile", "profile.css", "profile", mv);
 
         // fetch user posts
         mv.addObject("posts", postDao.getPostsByAuthorId(

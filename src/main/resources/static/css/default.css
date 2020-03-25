@@ -1,13 +1,23 @@
 :root{
-	--primary: #29354a;
+	/* --primary: #29354a;
 	--secondary: #1b2331;
     --secondary-alt: #232d40;
+    --third: #212f4a;
 
     --font-color: #9daece;
 	--box-shadow: #0f1726;
 
-	--highlight: #5d9100;
-    --highlight-alt: #aa9800;
+	--highlight: #38a43f;
+    --highlight-alt: #aa9800; */
+
+    --primary: #fff;
+    --secondary: #eee;
+    --secondary-alt: #ddd;
+    --third: #568efb;
+    --font-color: #333;
+    --box-shadow: #dbdbdb;
+    --highlight: #eee;
+    --highlight-alt: #ff8300;
 }
 
 body {
@@ -48,14 +58,17 @@ a {
 a.category {color:inherit;}
 a.category:hover {color:var(--highlight-alt);}
 
-.mainContainer {
-	width: 1300px;
+.mainContainer, .profileContainer {
+    width: 1300px;
 	margin: 10em auto;
-	min-height: 100px;
-	padding:10px;
-
-	background: var(--primary);
+    padding:10px;
 	box-shadow: 0 0 2em var(--box-shadow);
+}
+
+.mainContainer, .profileContainer, .profileLeftContainer, .profileRightContainer {
+	min-height: 100px;
+	background: var(--primary);
+    border-radius: 10px;
 }
 
 nav {
@@ -64,7 +77,6 @@ nav {
 	top:0;
 	background: var(--primary);
 	box-shadow: 0 0 2em var(--box-shadow);
-    border-bottom: 5px solid var(--highlight);
     z-index: 10;
 }
 

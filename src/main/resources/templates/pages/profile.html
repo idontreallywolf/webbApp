@@ -1,10 +1,20 @@
-<div class="mainContainer" th:fragment="profile">
-    <div class="">
-        <h2>Profile</h2>
+<div class="profileContainer" th:fragment="profile">
+    <div class="profileLeftContainer">
+
     </div>
-    <div th:if="${posts.size() > 0}" th:each="post : ${posts}" class="postContainer">
-        <div class="postTitle" th:text="${post.title}"></div>
-        <div class="postBody" th:text="${post.content}"></div>
-        <div class="postFooter" th:text="Footer"></div>
+    <div class="profileRightContainer">
+        <div class="profilePrimary">
+            <div class="profileCover"></div>
+            <div class="profileUser">
+                <img class="profilePic" src="/img/pepeHypers.png" alt=""/>
+            </div>
+        </div>
+        <div class="profileSecondary">
+            <div th:if="${posts.size() > 0}" th:each="post : ${posts}" class="postContainer">
+                <div class="postTitle" th:text="${post.title}"></div>
+                <div class="postBody" th:text="${post.content}"></div>
+                <div class="postFooter" th:text="Footer"></div>
+            </div>
+        </div>
     </div>
 </div>

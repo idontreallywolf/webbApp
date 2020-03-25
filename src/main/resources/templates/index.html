@@ -10,24 +10,10 @@
         <script src="/javascript/ajax.js" charset="utf-8"></script>
 	</head>
 	<body>
-		<nav>
-			<div class="navContainer">
-				<ul class="navMain">
-					<li><a href="/">Home <i class="fa fa-home"></i></a></li>
-				</ul>
+        <!-- include navigation bar -->
+        <div th:replace="'partials/nav'"/>
 
-				<ul class="navAccount" th:if="${session.sessID == null}">
-					<li><a href="/login"><i class="fa fa-key"></i> Sign in</a></li>
-					<li><a href="/register"><i class="fa fa-id-card"></i> Create Account</a></li>
-				</ul>
-
-                <ul class="navAccount" th:if="${session.sessID != null}">
-                    <li><a th:href="@{'/profile/' + ${session.sessID}}"><i class="fa fa-user"></i> My Profile</a></li>
-                </ul>
-			</div>
-		</nav>
-
+        <!-- requested page -->
 		<div th:replace="'pages/'+${page}"/>
-
 	</body>
 </html>

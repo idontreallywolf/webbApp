@@ -1,0 +1,50 @@
+.profileContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profileLeftContainer {
+    width: 24%;
+}
+
+.profileRightContainer {
+    width: 75%;
+}
+
+.profilePrimary {
+    position: relative;
+    height: 300px;
+    margin-bottom: 10px;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.profileCover {
+    position: absolute;
+    background: url('/img/sampleCover.png');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    border: 5px solid var(--box-shadow);
+}
+
+.profileUser {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    border-bottom: 3px solid var(--secondary);
+
+}
+
+.profileCover, .profileUser {
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+}
+
+img.profilePic {
+    border-radius: 10%;
+    width: 200px;
+}
