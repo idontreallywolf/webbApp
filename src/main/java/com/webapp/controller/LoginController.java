@@ -77,10 +77,10 @@ public class LoginController extends PageController implements PageControllerInt
 
     private void setSession(Account acc, HttpSession session) {
         session.setAttribute("sessID", acc.getId());
+        session.setAttribute("firstname", acc.getFirstname());
+        session.setAttribute("lastname", acc.getLastname());
         session.setAttribute("username", acc.getUsername());
-        session.setAttribute("firstname", acc.getUsername());
-        session.setAttribute("lastname", acc.getUsername());
-        session.setAttribute("username", acc.getUsername());
+        session.setAttribute("email", acc.getEmail());
         // TODO: user Roles
     }
 
