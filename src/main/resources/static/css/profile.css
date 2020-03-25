@@ -13,18 +13,26 @@
 
 .profilePrimary {
     position: relative;
-    height: 300px;
+    height: 250px;
     margin-bottom: 10px;
     z-index: 0;
     overflow: hidden;
 }
 
-.profileCover {
-    position: absolute;
+.profileLeftContainer .profileCover {
+    background: var(--highlight);
+}
+
+.profileRightContainer .profileCover {
     background: url('/img/sampleCover.png');
     background-size: 100% 100%;
     background-position: center center;
     background-repeat: no-repeat;
+}
+
+.profileCover {
+    position: absolute;
+
     z-index: 0;
     border: 5px solid var(--box-shadow);
 }
@@ -47,4 +55,10 @@
 img.profilePic {
     border-radius: 10%;
     width: 200px;
+}
+
+.profileRightContainer .profileUser span {
+    font-size: 3em;
+    color: var(--highlight);
+    text-shadow: 0 0 3px var(--font-color);
 }

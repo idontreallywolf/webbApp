@@ -1,8 +1,5 @@
 <div class="profileContainer" th:fragment="profile">
     <div class="profileLeftContainer">
-
-    </div>
-    <div class="profileRightContainer">
         <div class="profilePrimary">
             <div class="profileCover"></div>
             <div class="profileUser">
@@ -10,10 +7,35 @@
             </div>
         </div>
         <div class="profileSecondary">
-            <div th:if="${posts.size() > 0}" th:each="post : ${posts}" class="postContainer">
-                <div class="postTitle" th:text="${post.title}"></div>
-                <div class="postBody" th:text="${post.content}"></div>
-                <div class="postFooter" th:text="Footer"></div>
+
+        </div>
+        <div class="userActivities">
+            <h2>User Activity</h2>
+            <div class="userActivity">Pepe commented on ...        02/02/2020</div>
+            <div class="userActivity">Pepe posted a meme           02/02/2020</div>
+            <div class="userActivity">Pepe posted a question       02/02/2020</div>
+            <div class="userActivity">Pepe commented on ...        02/02/2020</div>
+        </div>
+    </div>
+    <div class="profileRightContainer">
+        <div class="profilePrimary">
+            <div class="profileCover"></div>
+            <div class="profileUser">
+                <span th:text="${session.firstname+' '+session.lastname}"></span>
+            </div>
+        </div>
+        <div class="profileSecondary">
+            <div class="postContainer" th:if="${posts.size() > 0}" th:each="post : ${posts}">
+                <div class="postVoteBar">
+                    <a class="postCategory">&#128514;</a>
+                    <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
+                    <div class="postVotes">•</div>
+                    <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
+                </div>
+                <div class="post">
+                    <div class="postTitle" th:text="${post.title}"></div>
+                    <div class="postBody" th:text="${post.content}"></div>
+                </div>
             </div>
         </div>
     </div>
