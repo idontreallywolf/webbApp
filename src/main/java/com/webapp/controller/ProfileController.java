@@ -36,7 +36,7 @@ public class ProfileController extends PageController implements PageControllerI
         
         mv.addObject("uid", session.getAttribute("userId"));
         mv.addObject("firstname", session.getAttribute("firstname"));
-        mv.addObject("lastname", session.getAttribute("lastnamename"));
+        mv.addObject("lastname", session.getAttribute("lastname"));
 
         // fetch user posts
         mv.addObject("posts", postDao.getPostsByAuthorId(
