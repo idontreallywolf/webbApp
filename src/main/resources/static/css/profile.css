@@ -4,11 +4,16 @@
 }
 
 .profileLeftContainer {
-    width: 24%;
+    width: 30%;
 }
 
 .profileRightContainer {
-    width: 75%;
+    width: 65%;
+}
+
+.profileLeftContainer,
+.profileRightContainer {
+    padding: 10px;
 }
 
 .profilePrimary {
@@ -61,4 +66,13 @@ img.profilePic {
     font-size: 3em;
     color: var(--highlight);
     text-shadow: 0 0 3px var(--font-color);
+}
+
+.userActivities {
+    display: flex;
+    flex-direction: column;
+}
+.userActivity {
+    display: inherit;
+    justify-content: space-between;
 }

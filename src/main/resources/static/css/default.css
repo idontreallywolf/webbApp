@@ -59,17 +59,25 @@ a {
 a.category {color:inherit;}
 a.category:hover {color:var(--highlight-alt);}
 
+.mainContainer {
+    width: 900px;
+}
+
+.profileContainer {
+    width: 900px;
+}
 .mainContainer, .profileContainer {
-    width: 1300px;
 	margin: 10em auto;
     padding:10px;
 	box-shadow: 0 0 2em var(--box-shadow);
 }
 
 .mainContainer, .profileContainer, .profileLeftContainer, .profileRightContainer {
-	min-height: 100px;
-	background: var(--primary);
+    min-height: 100px;
     border-radius: 10px;
+}
+.mainContainer, .profileLeftContainer, .profileRightContainer {
+	background: var(--primary);
 }
 
 nav {
@@ -130,8 +138,12 @@ nav > .navContainer > .navAccount {
 }
 
 nav a.newPostBtn {
-    background: #0087ff !important;
+    background: #0087ff;
     color: var(--primary) !important;
+}
+
+nav a.newPostBtn:hover {
+    background: #0478df !important;
 }
 
 .pull-left { float:left; }
