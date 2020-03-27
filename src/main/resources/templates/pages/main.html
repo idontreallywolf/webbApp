@@ -4,72 +4,17 @@
         <div class="">
             <h2>Main Feed</h2>
         </div>
-    	<div class="postContainer">
+    	<div class="postContainer" th:if="${posts.size() > 0}" th:each="post : ${posts}">
             <div class="postVoteBar">
-                <a class="postCategory">&#128514;</a>
+                <a class="postCategory" th:href="@{'/?category='+${post.getCategory()}}" th:utext="${post.getEmote()}"></a>
                 <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
                 <div class="postVotes">•</div>
                 <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
             </div>
             <div class="post">
-                <div class="postTitle">
-                    Header
-                </div>
-                <div class="postBody">
-                    Body
-                </div>
+                <div class="postTitle" th:text="${post.getTitle()}"></div>
+                <div class="postBody" th:utext="${post.getContent()}"></div>
             </div>
         </div>
-    	<div class="postContainer">
-            <div class="postVoteBar">
-                <a class="postCategory">&#129313;</a>
-                <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
-                <div class="postVotes">•</div>
-                <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
-            </div>
-            <div class="post">
-                <div class="postTitle">
-                    Header
-                </div>
-                <div class="postBody">
-                    Body
-                </div>
-            </div>
-        </div>
-    	<div class="postContainer">
-            <div class="postVoteBar">
-                <a class="postCategory">&#128054;</a>
-                <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
-                <div class="postVotes">•</div>
-                <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
-            </div>
-            <div class="post">
-                <div class="postTitle">
-                    Header
-                </div>
-                <div class="postBody">
-                    Body
-                </div>
-            </div>
-        </div>
-    	<div class="postContainer">
-            <div class="postVoteBar">
-                <a class="postCategory">&#128054;</a>
-                <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
-                <div class="postVotes">•</div>
-                <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
-            </div>
-            <div class="post">
-                <div class="postTitle">
-                    Header
-                </div>
-                <div class="postBody">
-                    Body
-                </div>
-            </div>
-        </div>
-
-
-
     </div>
 </div>

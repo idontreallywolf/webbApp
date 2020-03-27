@@ -27,7 +27,7 @@
         <div class="profileSecondary">
             <div class="postContainer" th:if="${posts.size() > 0}" th:each="post : ${posts}">
                 <div class="postVoteBar">
-                    <a class="postCategory">&#128514;</a>
+                    <a class="postCategory" th:utext="${post.getEmote()}" th:href="@{'/?category='+${post.getCategory()}}"></a>
                     <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
                     <div class="postVotes">•</div>
                     <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
