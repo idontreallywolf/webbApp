@@ -51,17 +51,46 @@ public class RegisterController extends PageController implements PageController
     	Map<String, String> errors = new HashMap<String, String>();
     	
     	if(session.getAttribute("sessID") != null) {
-    		System.out.println("SESSION EXISTS ???");
     		errors.put("error", "err#sess");
     		return errors;
     	}
-
-        errors.put("firstname", validateName(regForm.getFirstname()));
-        errors.put("lastname",  validateName(regForm.getLastname()));
-        errors.put("username",  validateUsername(regForm.getUsername()));
-        errors.put("password",  validatePassword(regForm.getPassword(), regForm.getPasswordConfirm()));
-        errors.put("email",     validateEmail(regForm.getEmail()));
-
+    	
+    	// keeps count of errors
+    	int errCounter = 0;
+    	
+    	// Validate fields and append results to errors map
+    	String fname = validateName(regForm.getFirstname());
+    	String lname = validateName(regForm.getLastname());
+    	String uname = validateUsername(regForm.getUsername());
+    	String pass  = validatePassword(regForm.getPassword(), regForm.getPasswordConfirm());
+    	String email = validateEmail(regForm.getEmail());
+    	
+        errors.put("firstname", fname);
+        errors.put("lastname",  lname);
+        errors.put("username",  uname);
+        errors.put("password",  pass);
+        errors.put("email",     email);
+        
+        // count errors
+        errCounter += fname.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
+        errCounter += lname.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
+        errCounter += uname.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
+        errCounter += pass .replaceAll("\\[\\]", "").length() > 0 ? 1:0;
+        errCounter += email.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
+        
+        // Attempt to create account if no errors occured.
+        if(errCounter == 0) {
+        	if(accDao.registerAccount(
+        			regForm.getFirstname(), 
+        			regForm.getLastname(), 
+        			regForm.getUsername(), 
+        			passwordEncoder.encode(regForm.getPassword()), 
+        			regForm.getEmail()) == false)
+        		errors.put("error", "err#reg");
+        }
+        
+        errors.put("counter", Integer.toString(errCounter));
+        
         return errors;
     }
 
