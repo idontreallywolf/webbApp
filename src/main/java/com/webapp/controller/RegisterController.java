@@ -37,8 +37,7 @@ public class RegisterController extends PageController implements PageController
     	
     	// Redirect user if a session is already set.
     	if(session.getAttribute("sessID") != null) {
-    		hsRes.setHeader("location", "/");
-    		hsRes.setStatus(302);
+    		redirect("/", hsRes);
     	}
     	
         ModelAndView mv = new ModelAndView("index");

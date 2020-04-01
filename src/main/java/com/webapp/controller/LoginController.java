@@ -30,8 +30,7 @@ public class LoginController extends PageController implements PageControllerInt
 
         // Redirect user if a session is already set.
         if(session.getAttribute("sessID") != null){
-            hsRes.setHeader("location", "/");
-            hsRes.setStatus(302);
+            redirect("/", hsRes);
             return null;
         }
 
@@ -71,8 +70,7 @@ public class LoginController extends PageController implements PageControllerInt
         if(session.getAttribute("sessID") != null)
             session.invalidate();
 
-        hsRes.setHeader("location", "/");
-        hsRes.setStatus(302);
+        redirect("/", hsRes);
     }
 
     private void setSession(Account acc, HttpSession session) {
