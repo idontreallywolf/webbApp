@@ -48,7 +48,7 @@ public class Config {
 		private static int port = 3306;
 
 		public static String getUrl() {
-			return "jdbc:mysql://"+host+":"+port+"/"+dbname;
+			return "jdbc:mysql://"+host+":"+port+"/"+dbname+"?serverTimezone=Europe/Stockholm";
 		}
 	}
 
