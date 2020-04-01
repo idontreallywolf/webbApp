@@ -62,8 +62,8 @@ public class LoginController extends PageController implements PageControllerInt
             return new ResponseObject("success");
         }
 
-        // unknown username or password
-        return new ResponseObject("err#uuop");
+        // wrong username or password
+        return new ResponseObject("err#wuop");
     }
 
     @GetMapping("/logout")
