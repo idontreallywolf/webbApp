@@ -18,6 +18,22 @@ $(document).ready(function(){
         return alertBox;
     }
 
+    $('.newPostBtn').click(function(){
+        if(!$(this).hasClass('show')){
+            $('.shadow').hide();
+            $(this).removeClass('hide');
+            $(this).addClass('show');
+
+            $(this).html('New post <i class="fa fa-plus"></i>');
+        } else {
+            $('.shadow').css('display','flex');
+            $(this).removeClass('show');
+            $(this).addClass('hide');
+
+            $(this).html('Cancel <i class="fa fa-times"></i>');
+        }
+    });
+
     $(document).on('click', '.alert-box .alertBox-close', function() {
         let this_ = this;
         $(this).parents('.alert-box').fadeOut(function(){

@@ -146,6 +146,13 @@ nav a.newPostBtn:hover {
     background: #0478df !important;
 }
 
+nav a.newPostBtn.hide {
+    background: #e83b3b;
+}
+nav a.newPostBtn.hide:hover {
+    background: #ca1e1e !important;
+}
+
 .pull-left { float:left; }
 .pull-right { float:right; }
 .hidden { display: none; visibility: hidden; opacity: 0; }
@@ -220,4 +227,65 @@ nav a.newPostBtn:hover {
 a.postCategory {
     border-bottom: 1px solid var(--secondary);
     padding-bottom: 3px;
+}
+
+.shadow {
+    display: none;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.newPostContainer {
+    min-width: 500px;
+    border-radius: 10px;
+    background: var(--primary);
+    padding: 10px;
+    box-shadow: 0 0 3em #626262;
+    min-height: 100px;
+}
+
+.newPostContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+.newPostContainer form input {
+    width: 100%;
+    font-size: 1.1em;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.memeGenerator {
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+}
+
+#canvas {
+    border: 1px solid var(--secondary-alt);
+    width: 400px;
+    height: 400px;
+}
+
+.canvasHolder {
+    width: 50%;
+}
+
+.canvasOptions {
+    width: 45%;
+}
+
+.canvasSettings {
+    display: flex;
+    flex-direction: column;
+}
+
+.canvasSettings input {
+    width: auto !important;
 }

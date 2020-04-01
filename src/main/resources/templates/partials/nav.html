@@ -10,8 +10,42 @@
         </ul>
 
         <ul class="navAccount" th:if="${session.sessID != null}">
-            <li><a href="/profile/"><i class="fa fa-user"></i> My Profile</a></li>
-            <li><a href="/newpost/" class="newPostBtn">New post <i class="fa fa-plus"></i></a></li>
+            <li><a href="/profile/"><i class="fa fa-user"></i> <span th:text="${session.firstname+' '+session.lastname}"></span></a></li>
+            <li><a class="newPostBtn show">New post <i class="fa fa-plus"></i></a></li>
         </ul>
     </div>
 </nav>
+<div class="shadow">
+    <div class="newPostContainer">
+        <form action="index.html" method="post">
+            <h1>Meme Generator</h1>
+            <div style="display:flex;">
+                <input type="text" name="title" placeholder="post title">
+            </div>
+            <div class="memeGenerator">
+                <div class="canvasHolder">
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="canvasOptions">
+                    <form id="memeUploadForm" method="post" onsubmit="return false;">
+                        <input id="uploadedImage" type="file" name="uploadedImage" value="">
+                        <!--input type="submit" name="submit" value="Upload"-->
+                    </form>
+
+                    <div class="canvasSettings">
+                        <input id="topText" type="text" name="topText" placeholder="TOP TEXT">
+                        <input id="bottomText" type="text" name="bottomText" placeholder="BOTTOM TEXT">
+
+                        <label for="top">Top text size</label>
+                        <input type="range" id="slider_topTxtSize" name="top" min="10" max="50" value="30">
+
+                        <label for="bottom">Bottom text size</label>
+                        <input type="range" id="slider_bottomTxtSize" name="bottom" min="10" max="50" value="30">
+
+                        <a class="saveImageBtn">Save</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
