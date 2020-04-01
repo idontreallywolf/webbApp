@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -114,9 +115,15 @@ public class AccountDaoImpl extends Dao implements AccountDao {
 	}
 
 	@Override
-	public void registerAccount(String firstname, String lastname, String username, String password, String email) {
+	public boolean registerAccount(String firstname, String lastname, String username, String password, String email) {
         String sqlInsertQuery = "INSERT INTO `accounts`(`firstname`,`lastname`,`username`,`password`,`email`) VALUES(?, ?, ?, ?, ?)";
-		dbh.update(sqlInsertQuery, firstname, lastname, username, password, email);
+		try {
+			dbh.update(sqlInsertQuery, firstname, lastname, username, password, email);
+		} catch(DataAccessException e) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	@Override
