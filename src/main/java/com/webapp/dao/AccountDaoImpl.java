@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import com.webapp.model.Account;
 

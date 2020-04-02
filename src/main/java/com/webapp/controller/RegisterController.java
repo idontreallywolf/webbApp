@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.webapp.Config;
 import com.webapp.dao.AccountDao;
-import com.webapp.model.Account;
 import com.webapp.model.RegisterForm;
 
 @Controller
