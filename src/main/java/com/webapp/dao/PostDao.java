@@ -10,5 +10,5 @@ public interface PostDao {
     public List<Post> getPostsByAuthorId(int authorId);
     public List<Post> getPostsByCategory(Category categoryType);
     public Post getPostById(int postId);
-    public void createPost(int authorId, String title,  String content);
+    public boolean createPost(int authorId, String title,  String imgName, int category);
 }

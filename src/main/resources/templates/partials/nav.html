@@ -17,8 +17,19 @@
 </nav>
 <div class="shadow">
     <div class="newPostContainer">
-        <form action="index.html" method="post">
-            <h1>Meme Generator</h1>
+        <form id="memeUploadForm" method="post" onsubmit="return false;">
+            <div class="memeGenHeader">
+                <span><h1>Meme Generator</h1></span>
+                <span>
+                    <select class="" name="category">
+                        <option value="0">&#127808; All</option>
+                        <option value="1">&#127808; Animals</option>
+                        <option value="2">&#127808; Funny</option>
+                        <option value="3">&#127808; Meme</option>
+                        <option value="4">&#127808; Question</option>
+                    </select>
+                </span>
+            </div>
             <div style="display:flex;">
                 <input type="text" name="title" placeholder="post title">
             </div>
@@ -27,10 +38,9 @@
                     <canvas id="canvas"></canvas>
                 </div>
                 <div class="canvasOptions">
-                    <form id="memeUploadForm" method="post" onsubmit="return false;">
+                    <div>
                         <input id="uploadedImage" type="file" name="uploadedImage" value="">
-                        <!--input type="submit" name="submit" value="Upload"-->
-                    </form>
+                    </div>
 
                     <div class="canvasSettings">
                         <input id="topText" type="text" name="topText" placeholder="TOP TEXT">
@@ -42,7 +52,10 @@
                         <label for="bottom">Bottom text size</label>
                         <input type="range" id="slider_bottomTxtSize" name="bottom" min="10" max="50" value="30">
 
-                        <a class="saveImageBtn">Save</a>
+                        <!--a class="saveMemeBtn">Save</a-->
+                        <input type="submit" name="submit" value="Save">
+                        <input type="hidden" name="imgData" value="">
+                        <input type="hidden" name="imgName" value="">
                     </div>
                 </div>
             </div>

@@ -190,6 +190,16 @@ nav a.newPostBtn.hide:hover {
     padding: 5px;
 }
 
+.postBody img {
+    max-width: 420px;
+}
+
+.postBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .postTitle {
     font-size: 1.1em;
     background: var(--postTitle);
@@ -262,9 +272,24 @@ a.postCategory {
 }
 
 .memeGenerator {
-    display: flex;
     width: 800px;
+}
+
+.memeGenerator, .memeGenHeader {
+    display: flex;
     justify-content: space-between;
+}
+
+.memeGenHeader {
+    align-items: center;
+}
+
+.memeGenHeader select {
+    width: 150px;
+    text-align: center;
+    font-size: 1em;
+    height: 40px;
+    border: 1px solid var(--secondary-alt);
 }
 
 #canvas {

@@ -18,6 +18,32 @@ $(document).ready(function(){
         return alertBox;
     }
 
+    $('#memeUploadForm').submit(function(event){
+        event.preventDefault();
+        let canvasData = document.getElementById("canvas").toDataURL("image/png");
+        $("input[name=\"imgData\"]").val(canvasData);
+        $("input[name=\"imgName\"]").val(generateString());
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url:'/newpost/',
+            type:'post',
+            data: getFormData($(this), ["topText","bottomText","top","bottom"]),
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function(data){
+                console.log(data);
+            },
+            error: function(e){
+                console.log("ERROR:" + e);
+            }
+        });
+    });
+
     $('.newPostBtn').click(function(){
         if(!$(this).hasClass('show')){
             $('.shadow').hide();
@@ -165,11 +191,28 @@ $(document).ready(function(){
     /**
         Parses form data into a JSON object
     */
-    function getFormData(element){
+    function getFormData(element, excludeElements = null){
         let formData = {};
         $.each(element.serializeArray(), function(key, obj){
+
+            // skip unwanted elements
+            if(excludeElements != null)
+                if(excludeElements.includes(obj.name))
+                    return true;
+
             formData[obj.name] = obj.value;
         });
         return JSON.stringify(formData);
+    }
+
+
+    function generateString() {
+        let length = 6,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        str = "";
+        for (let i=0, n = charset.length; i < length; ++i) {
+            str += charset.charAt(Math.floor(Math.random() * n));
+        }
+        return str;
     }
 });
