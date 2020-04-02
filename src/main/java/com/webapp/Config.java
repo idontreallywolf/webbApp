@@ -43,7 +43,7 @@ public class Config {
 	private static class Database {
 		private static String host = "127.0.0.1";
 		private static String user = "root";
-		private static String pass = "root";
+		private static String pass = "milan12345";
 		private static String dbname = "memedb";
 		private static int port = 3306;
 
