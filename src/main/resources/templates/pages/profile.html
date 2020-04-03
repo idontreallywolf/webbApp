@@ -34,7 +34,9 @@
                 </div>
                 <div class="post">
                     <div class="postTitle" th:text="${post.title}"></div>
-                    <div class="postBody" th:text="${post.content}"></div>
+                    <div class="postBody">
+                    	<img th:src="${'/memes/'+post.content+'.png'}"/>
+                    </div>
                 </div>
             </div>
         </div>

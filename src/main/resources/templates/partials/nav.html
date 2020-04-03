@@ -10,8 +10,15 @@
         </ul>
 
         <ul class="navAccount" th:if="${session.sessID != null}">
-            <li><a href="/profile/"><i class="fa fa-user"></i> <span th:text="${session.firstname+' '+session.lastname}"></span></a></li>
-            <li><a class="newPostBtn show">New post <i class="fa fa-plus"></i></a></li>
+            <li><a><span><img src="/img/pepeHypers.png" alt=""></span> <span th:text="${session.firstname+' '+session.lastname}"></span></a>
+                <ul class="dropdown">
+                    <div class="">
+                        <li><a href="/profile/">My Profile</a></li>
+                        <li><a href="/logout/">Sign out</a></li>
+                    </div>
+                </ul>
+            </li>
+            <li><a class="newPostBtn show"><span>New post</span><span><i class="fa fa-plus"></i></span></a></li>
         </ul>
     </div>
 </nav>
