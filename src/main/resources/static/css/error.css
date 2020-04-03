@@ -1,0 +1,37 @@
+body {
+    font-family: 'arial',sans-serif;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.errorContainer {
+    position: absolute;
+    top:0;bottom:0;
+    left:0;right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 2em #c8c8c8;
+    text-align: center;
+}
+
+.goBackBtn {
+    display: block;
+    padding: 10px 0px;
+    background: #37b350;
+    color: #fff;
+    margin-top: 1em;
+}
+
+.goBackBtn:hover {
+    background: #279f3f;
+}

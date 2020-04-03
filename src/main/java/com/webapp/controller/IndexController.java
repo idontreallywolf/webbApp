@@ -38,9 +38,15 @@ public class IndexController extends PageController implements PageControllerInt
 				mv.addObject("posts", postDao.getPosts());
 			}
 		}
-		
+
 		mv.addObject("posts", postDao.getPostsByCategory(category));
 
+		return mv;
+	}
+
+	@GetMapping("/error")
+	public ModelAndView error() {
+		ModelAndView mv = new ModelAndView("error");
 		return mv;
 	}
 
