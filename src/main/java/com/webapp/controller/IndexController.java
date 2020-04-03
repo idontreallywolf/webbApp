@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,7 @@ public class IndexController extends PageController implements PageControllerInt
 
 	@Override
 	@GetMapping("/")
-	public ModelAndView run(HttpSession session, HttpServletResponse hsRes) {
+	public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes) {
 		ModelAndView mv = new ModelAndView("index");
 		mv = initDefaultAttributes("Welcome | Pepe", null, "main", mv);
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -32,7 +33,7 @@ public class RegisterController extends PageController implements PageController
 	PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
-    public ModelAndView run(HttpSession session, HttpServletResponse hsRes){
+    public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes){
     	
     	// Redirect user if a session is already set.
     	if(session.getAttribute("sessID") != null) {

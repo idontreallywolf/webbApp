@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +23,7 @@ public class ProfileController extends PageController implements PageControllerI
 	PostDao postDao;
 
     @GetMapping("/profile")
-    public ModelAndView run(HttpSession session, HttpServletResponse hsRes) {
+    public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes) {
 
         // Redirect user if there's no active session
         if(session.getAttribute("sessID") == null) {

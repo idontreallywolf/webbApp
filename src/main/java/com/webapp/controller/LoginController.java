@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +27,7 @@ public class LoginController extends PageController implements PageControllerInt
     PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
-    public ModelAndView run(HttpSession session, HttpServletResponse hsRes){
+    public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes){
 
         // Redirect user if a session is already set.
         if(session.getAttribute("sessID") != null){
