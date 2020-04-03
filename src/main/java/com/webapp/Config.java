@@ -20,7 +20,15 @@ import com.webapp.model.Post;
 public class Config {
 	public static String mainTitle = "PepeSite";
 	public static String rootDir = System.getProperty("user.dir");
-
+	
+	/**
+	 * Configuration for Categories
+	 * */
+	public static class Category {
+		public static int CATEGORY_MIN = 0;
+		public static int CATEGORY_MAX = 4;
+	}
+	
     /**
     *   Configuration for Accounts
     */
