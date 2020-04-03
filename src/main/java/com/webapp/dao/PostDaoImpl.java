@@ -75,7 +75,7 @@ public class PostDaoImpl extends Dao implements PostDao {
 	}
 
 	@Override
-	public List<Post> getPostsByCategory(Category category) {
+	public List<Post> getPostsByCategory(int category) {
 		Object[] params = {category};
 
 		List<Post> posts = dbh.query("SELECT * FROM `posts` WHERE `category` = ? ORDER BY `time` DESC", params, new RowMapper<Post>() {
