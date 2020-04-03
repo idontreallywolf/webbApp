@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.webapp.Config;
 import com.webapp.enums.Category;
 import com.webapp.model.Post;
 
@@ -76,9 +77,16 @@ public class PostDaoImpl extends Dao implements PostDao {
 
 	@Override
 	public List<Post> getPostsByCategory(int category) {
+		String qryStr;
 		Object[] params = {category};
+		
+		if (category > Config.Category.CATEGORY_MIN 
+		&&  category <= Config.Category.CATEGORY_MAX) 
+			qryStr = "SELECT * FROM `posts` WHERE `category` = ? ORDER BY `time` DESC";
+		else
+			return getPosts();
 
-		List<Post> posts = dbh.query("SELECT * FROM `posts` WHERE `category` = ? ORDER BY `time` DESC", params, new RowMapper<Post>() {
+		List<Post> posts = dbh.query(qryStr, params, new RowMapper<Post>() {
 
 			@Override
 			public Post mapRow(ResultSet rs, int rowNum) throws SQLException {

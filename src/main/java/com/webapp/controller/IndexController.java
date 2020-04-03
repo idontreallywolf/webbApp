@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webapp.dao.PostDao;
+import com.webapp.enums.Category;
 
 @Controller
 public class IndexController extends PageController implements PageControllerInterface {
@@ -28,7 +29,17 @@ public class IndexController extends PageController implements PageControllerInt
 			mv.addObject("username", session.getAttribute("username"));
 		}
 
-        mv.addObject("posts", postDao.getPosts());
+		// "all" by default
+		int category = 0;
+		if(req.getParameterMap().containsKey("category")) {
+			try {
+				category = Integer.parseInt(req.getParameter("category"));
+			} catch(NumberFormatException e) {
+				mv.addObject("posts", postDao.getPosts());
+			}
+		}
+		
+		mv.addObject("posts", postDao.getPostsByCategory(category));
 
 		return mv;
 	}
