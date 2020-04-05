@@ -16,7 +16,7 @@ import com.webapp.dao.PostDaoImpl;
 import com.webapp.model.Post;
 
 @Configuration
-@ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao" })
+@ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao", "com.webapp.test" })
 public class Config {
 	public static String mainTitle = "PepeSite";
 	public static String rootDir = System.getProperty("user.dir");

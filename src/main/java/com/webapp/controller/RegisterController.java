@@ -31,6 +31,10 @@ public class RegisterController extends PageController implements PageController
 	AccountDao accDao;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	public RegisterController(AccountDao dao) {
+		this.accDao = dao;
+	}
 
     @GetMapping("/register")
     public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes){
