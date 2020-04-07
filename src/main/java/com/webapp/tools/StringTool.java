@@ -13,6 +13,7 @@ public class StringTool {
 	 * @return Capitalized string
 	 * */
 	public static String ucFirst(String s) {
+		s = s.toLowerCase();
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
 	}
 }
