@@ -1,0 +1,55 @@
+:root {
+    --bg-success: #c1ffc1;
+    --color-success: #0d4f0d;
+    --border-success: #9bee9b;
+
+    --bg-danger: #ffe1e1;
+    --color-danger: #822222;
+    --border-danger: #f2c3c3;
+
+    --bg-warning: #ffedcb;
+    --color-warning: #795512;
+    --border-warning: #eed4a3;
+
+    --bg-info: #cbdfff;
+    --color-info: #20415e;
+    --border-info: #a9c4ee;
+
+}
+
+.alert-box {
+    padding: 8px 8px;
+    border: 1px solid var(--highlight);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert-success {
+    background: var(--bg-success);
+    color: var(--color-success);
+    border-color: var(--border-success);
+}
+
+.alert-warning {
+    background: var(--bg-warning);
+    color: var(--color-warning);
+    border-color: var(--border-warning);
+}
+
+.alert-danger {
+    background: var(--bg-danger);
+    color: var(--color-danger);
+    border-color: var(--border-danger);
+}
+
+.alert-info {
+    background: var(--bg-info);
+    color: var(--color-info);
+    border-color: var(--border-info);
+}
+
+a.alertBox-close {
+    color: inherit;
+    padding: 5px;
+}
