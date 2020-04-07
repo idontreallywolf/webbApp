@@ -1,0 +1,71 @@
+<nav>
+    <div class="navContainer">
+        <ul class="navMain">
+            <li><a href="/">Home <i class="fa fa-home"></i></a></li>
+        </ul>
+
+        <ul class="navAccount" th:if="${session.sessID == null}">
+            <li><a href="/login"><i class="fa fa-key"></i> Sign in</a></li>
+            <li><a href="/register"><i class="fa fa-id-card"></i> Create Account</a></li>
+        </ul>
+
+        <ul class="navAccount" th:if="${session.sessID != null}">
+            <li><a><span><img src="/img/pepeHypers.png" alt=""></span> <span th:text="${session.firstname+' '+session.lastname}"></span></a>
+                <ul class="dropdown">
+                    <div class="">
+                        <li><a href="/profile/">My Profile</a></li>
+                        <li><a href="/logout/">Sign out</a></li>
+                    </div>
+                </ul>
+            </li>
+            <li><a class="newPostBtn show"><span>New post</span><span><i class="fa fa-plus"></i></span></a></li>
+        </ul>
+    </div>
+</nav>
+<div class="shadow">
+    <div class="newPostContainer">
+        <form id="memeUploadForm" method="post" onsubmit="return false;">
+            <div class="memeGenHeader">
+                <span><h1>Meme Generator</h1></span>
+                <span>
+                    <select class="" name="category">
+                        <option value="0">&#127808; All</option>
+                        <option value="1">&#127808; Animals</option>
+                        <option value="2">&#127808; Funny</option>
+                        <option value="3">&#127808; Meme</option>
+                        <option value="4">&#127808; Question</option>
+                    </select>
+                </span>
+            </div>
+            <div style="display:flex;">
+                <input type="text" name="title" placeholder="post title">
+            </div>
+            <div class="memeGenerator">
+                <div class="canvasHolder">
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="canvasOptions">
+                    <div>
+                        <input id="uploadedImage" type="file" name="uploadedImage" value="">
+                    </div>
+
+                    <div class="canvasSettings">
+                        <input id="topText" type="text" name="topText" placeholder="TOP TEXT">
+                        <input id="bottomText" type="text" name="bottomText" placeholder="BOTTOM TEXT">
+
+                        <label for="top">Top text size</label>
+                        <input type="range" id="slider_topTxtSize" name="top" min="10" max="50" value="30">
+
+                        <label for="bottom">Bottom text size</label>
+                        <input type="range" id="slider_bottomTxtSize" name="bottom" min="10" max="50" value="30">
+
+                        <!--a class="saveMemeBtn">Save</a-->
+                        <input type="submit" name="submit" value="Save">
+                        <input type="hidden" name="imgData" value="">
+                        <input type="hidden" name="imgName" value="">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

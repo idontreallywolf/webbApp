@@ -1,16 +1,33 @@
 <div class="registerContainer" th:fragment="login">
     <form class="registerForm" method="post">
+        <div class="responseBox"></div>
         <div class="formHeader">
             Register Account <i class="fa fa-id-card"></i>
         </div>
-
-        <input type="text" name="firstname" placeholder="Firstname">
-        <input type="text" name="lastname" placeholder="Lastname">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="password">
-        <input type="password" name="passwordConfirm" placeholder="Confirm password">
-        <input type="email" name="email" placeholder="email@abc.xyz">
-
+        <div class="inputHolder">
+            <input id="firstname" type="text" name="firstname" placeholder="Firstname">
+            <div class="inputErrorBox"></div>
+        </div>
+        <div class="inputHolder">
+            <input id="lastname" type="text" name="lastname" placeholder="Lastname">
+            <div class="inputErrorBox"></div>
+        </div>
+        <div class="inputHolder">
+            <input id="username" type="text" name="username" placeholder="Username">
+            <div class="inputErrorBox"></div>
+        </div>
+        <div class="inputHolder">
+            <input id="password" type="password" name="password" placeholder="password">
+            <div class="inputErrorBox"></div>
+        </div>
+        <div class="inputHolder">
+            <input id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Confirm password">
+            <div class="inputErrorBox"></div>
+        </div>
+        <div class="inputHolder">
+            <input id="email" type="email" name="email" placeholder="email@abc.xyz">
+            <div class="inputErrorBox"></div>
+        </div>
         <div class="hidden">
             <input type="submit" name="submit" value="Sign in">
         </div>

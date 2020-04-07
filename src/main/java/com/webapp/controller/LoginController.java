@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,14 +19,22 @@ import com.webapp.model.LoginForm;
 
 @Controller
 public class LoginController extends PageController implements PageControllerInterface {
-	
-	@Autowired
-	AccountDao accDao;
-	@Autowired
-	PasswordEncoder passwordEncoder;
-	
-	@GetMapping("/login")
-    public ModelAndView run(HttpSession session, HttpServletResponse hsRes){
+
+    @Autowired
+    AccountDao accDao;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @GetMapping("/login")
+    public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes){
+
+        // Redirect user if a session is already set.
+        if(session.getAttribute("sessID") != null){
+            redirect("/", hsRes);
+            return null;
+        }
+
         ModelAndView mv = new ModelAndView("index");
         mv = initDefaultAttributes("Login", "login.css", "login", mv);
         return mv;
@@ -35,26 +44,43 @@ public class LoginController extends PageController implements PageControllerInt
     @ResponseBody
     public ResponseObject login(@RequestBody LoginForm loginFormInfo, HttpSession session){
 
-    	// Retrieve account
-    	Account acc = accDao.getAccountByUsername(loginFormInfo.getUsername());
-    	if(acc == null)
-    		return new ResponseObject("Account Not found");
-    	
-    	// compare passwords
-    	if(passwordEncoder.matches(loginFormInfo.getPassword(), acc.getPassword())) {
-    		setSession(acc, session);
-    	}
+        if(session.getAttribute("sessID") != null) {
+            // session already active
+            return new ResponseObject("err#active");
+        }
 
-        return new ResponseObject("Uknown username or password");
+        // Retrieve account
+        Account acc = accDao.getAccountByUsername(loginFormInfo.getUsername());
+        if(acc == null) {
+            // not found
+            return new ResponseObject("err#noacc");
+        }
+
+        // compare passwords
+        if(passwordEncoder.matches(loginFormInfo.getPassword(), acc.getPassword())) {
+            setSession(acc, session);
+            return new ResponseObject("success");
+        }
+
+        // wrong username or password
+        return new ResponseObject("err#wuop");
     }
-    
+
+    @GetMapping("/logout")
+    public void logout(HttpSession session, HttpServletResponse hsRes){
+        if(session.getAttribute("sessID") != null)
+            session.invalidate();
+
+        redirect("/", hsRes);
+    }
+
     private void setSession(Account acc, HttpSession session) {
-		session.setAttribute("sessID", acc.getId());
-		session.setAttribute("username", acc.getUsername());
-		session.setAttribute("firstname", acc.getUsername());
-		session.setAttribute("lastname", acc.getUsername());
-		session.setAttribute("username", acc.getUsername());
-		// TODO: user Roles
+        session.setAttribute("sessID", acc.getId());
+        session.setAttribute("firstname", acc.getFirstname());
+        session.setAttribute("lastname", acc.getLastname());
+        session.setAttribute("username", acc.getUsername());
+        session.setAttribute("email", acc.getEmail());
+        // TODO: user Roles
     }
 
 }

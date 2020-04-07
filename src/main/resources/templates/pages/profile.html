@@ -1,0 +1,44 @@
+<div class="profileContainer" th:fragment="profile">
+    <div class="profileLeftContainer">
+        <div class="profilePrimary">
+            <div class="profileCover"></div>
+            <div class="profileUser">
+                <img class="profilePic" src="/img/pepeHypers.png" alt=""/>
+            </div>
+        </div>
+        <div class="profileSecondary">
+
+        </div>
+        <div class="userActivities">
+            <h2>User Activity</h2>
+            <div class="userActivity"><span>commented on post1</span><span>02/02/2020</span></div>
+            <div class="userActivity"><span>commented on post2</span><span>02/02/2020</span></div>
+            <div class="userActivity"><span>commented on post3</span><span>02/02/2020</span></div>
+            <div class="userActivity"><span>commented on post4</span><span>02/02/2020</span></div>
+        </div>
+    </div>
+    <div class="profileRightContainer">
+        <div class="profilePrimary">
+            <div class="profileCover"></div>
+            <div class="profileUser">
+                <span th:text="${firstname+' '+lastname}"></span>
+            </div>
+        </div>
+        <div class="profileSecondary">
+            <div class="postContainer" th:if="${posts.size() > 0}" th:each="post : ${posts}">
+                <div class="postVoteBar">
+                    <a class="postCategory" th:utext="${post.getEmote()}" th:href="@{'/?category='+${post.getCategory()}}"></a>
+                    <a class="voteUp"><i class="fa fa-arrow-up"></i></a>
+                    <div class="postVotes">•</div>
+                    <a class="voteDown"><i class="fa fa-arrow-down"></i></a>
+                </div>
+                <div class="post">
+                    <div class="postTitle" th:text="${post.title}"></div>
+                    <div class="postBody">
+                    	<img th:src="${'/memes/'+post.content+'.png'}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

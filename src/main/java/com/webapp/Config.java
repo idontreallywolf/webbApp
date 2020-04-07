@@ -10,13 +10,25 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.webapp.dao.AccountDao;
 import com.webapp.dao.AccountDaoImpl;
+import com.webapp.dao.Dao;
+import com.webapp.dao.PostDao;
+import com.webapp.dao.PostDaoImpl;
+import com.webapp.model.Post;
 
 @Configuration
-@ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao" })
+@ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao", "com.webapp.test" })
 public class Config {
 	public static String mainTitle = "PepeSite";
 	public static String rootDir = System.getProperty("user.dir");
-
+	
+	/**
+	 * Configuration for Categories
+	 * */
+	public static class Category {
+		public static int CATEGORY_MIN = 0;
+		public static int CATEGORY_MAX = 4;
+	}
+	
     /**
     *   Configuration for Accounts
     */
@@ -29,7 +41,7 @@ public class Config {
 
         public static int minPassLength = 8;
         public static int maxPassLength = 60;
-        
+
         public static int minEmailLength = 6;
     }
 
@@ -44,7 +56,7 @@ public class Config {
 		private static int port = 3306;
 
 		public static String getUrl() {
-			return "jdbc:mysql://"+host+":"+port+"/"+dbname;
+			return "jdbc:mysql://"+host+":"+port+"/"+dbname+"?serverTimezone=Europe/Stockholm";
 		}
 	}
 
@@ -62,10 +74,17 @@ public class Config {
 		return ds;
 	}
 
-	@Bean
-	public AccountDao getAccountDao() {
-		return new AccountDaoImpl(getDataSource());
-	}
+	
+    @Bean
+    public AccountDao getAccDao() {
+    	return new AccountDaoImpl(getDataSource());
+    }
+    
+    @Bean
+    public PostDao getPostDao() {
+    	return new PostDaoImpl(getDataSource());
+    }
+    
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
