@@ -28,22 +28,24 @@ import com.webapp.model.RegisterForm;
 public class RegisterController extends PageController implements PageControllerInterface {
 
     @Autowired
-	AccountDao accDao;
-	@Autowired
-	PasswordEncoder passwordEncoder;
-	
-	public RegisterController(AccountDao dao) {
-		this.accDao = dao;
-	}
+    AccountDao accDao;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    public RegisterController(AccountDao dao) {
+        this.accDao = dao;
+    }
 
     @GetMapping("/register")
     public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes){
-    	
-    	// Redirect user if a session is already set.
-    	if(session.getAttribute("sessID") != null) {
-    		redirect("/", hsRes);
-    	}
-    	
+
+        // Redirect user if a session is already set.
+        if(session.getAttribute("sessID") != null) {
+            redirect("/", hsRes);
+            return null;
+        }
+
         ModelAndView mv = new ModelAndView("index");
         mv = initDefaultAttributes("Register Account", "login.css", "register", mv);
         return mv;
@@ -52,49 +54,49 @@ public class RegisterController extends PageController implements PageController
     @PostMapping("/register")
     @ResponseBody
     public Map<String, String> registerAccount(@RequestBody RegisterForm regForm, HttpSession session){
-    	Map<String, String> errors = new HashMap<String, String>();
-    	
-    	if(session.getAttribute("sessID") != null) {
-    		errors.put("error", "err#sess");
-    		return errors;
-    	}
-    	
-    	// keeps count of errors
-    	int errCounter = 0;
-    	
-    	// Validate fields and append results to errors map
-    	String fname = validateName(regForm.getFirstname());
-    	String lname = validateName(regForm.getLastname());
-    	String uname = validateUsername(regForm.getUsername());
-    	String pass  = validatePassword(regForm.getPassword(), regForm.getPasswordConfirm());
-    	String email = validateEmail(regForm.getEmail());
-    	
+        Map<String, String> errors = new HashMap<String, String>();
+
+        // Terminate if there's no active session
+        if(session.getAttribute("sessID") != null) {
+            errors.put("error", "err#sess");
+            return errors;
+        }
+
+        // keeps count of errors
+        int errCounter = 0;
+
+        // Validate fields and append results to errors map
+        String fname = validateName(regForm.getFirstname());
+        String lname = validateName(regForm.getLastname());
+        String uname = validateUsername(regForm.getUsername());
+        String pass  = validatePassword(regForm.getPassword(), regForm.getPasswordConfirm());
+        String email = validateEmail(regForm.getEmail());
+
         errors.put("firstname", fname);
         errors.put("lastname",  lname);
         errors.put("username",  uname);
         errors.put("password",  pass);
         errors.put("email",     email);
-        
+
         // count errors
         errCounter += fname.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
         errCounter += lname.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
         errCounter += uname.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
         errCounter += pass .replaceAll("\\[\\]", "").length() > 0 ? 1:0;
         errCounter += email.replaceAll("\\[\\]", "").length() > 0 ? 1:0;
-        
+
         // Attempt to create account if no errors occured.
         if(errCounter == 0) {
-        	if(accDao.registerAccount(
-        			regForm.getFirstname(), 
-        			regForm.getLastname(), 
-        			regForm.getUsername(), 
-        			passwordEncoder.encode(regForm.getPassword()), 
-        			regForm.getEmail()) == false)
-        		errors.put("error", "err#reg");
+            if(accDao.registerAccount(
+                regForm.getFirstname(),
+                regForm.getLastname(),
+                regForm.getUsername(),
+                passwordEncoder.encode(regForm.getPassword()),
+                regForm.getEmail()) == false)
+                errors.put("error", "err#reg");
         }
-        
+
         errors.put("counter", Integer.toString(errCounter));
-        
         return errors;
     }
 
@@ -204,10 +206,10 @@ public class RegisterController extends PageController implements PageController
         List<String> errors = new ArrayList<String>();
 
         if(email.length() < Config.Account.minEmailLength)
-        	errors.add("err#len");
+            errors.add("err#len");
 
         String regexPattern = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-                            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
         Pattern p = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(email);

@@ -7,9 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface PageControllerInterface {
-	
+
 	/**
-	 * Run method acts like main method for each page request
-	 * */
+	* Run method acts like main method for each pageController
+    */
 	public abstract ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes);
 }

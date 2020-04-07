@@ -20,16 +20,16 @@ import io.github.cdimascio.dotenv.Dotenv;
 @Configuration
 @ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao", "com.webapp.test" })
 public class Config {
-	public static String mainTitle = "PepeSite";
-	public static String rootDir = System.getProperty("user.dir");
+    public static String mainTitle = "PepeSite";
+    public static String rootDir = System.getProperty("user.dir");
 
-	/**
-	 * Configuration for Categories
-	 * */
-	public static class Category {
-		public static int CATEGORY_MIN = 0;
-		public static int CATEGORY_MAX = 4;
-	}
+    /**
+    * Configuration for Categories
+    * */
+    public static class Category {
+        public static int CATEGORY_MIN = 0;
+        public static int CATEGORY_MAX = 4;
+    }
 
     /**
     *   Configuration for Accounts
@@ -50,28 +50,28 @@ public class Config {
     /**
     *   Database Config
     */
-	private static class Database {
-		public static String getUrl() {
-			return "jdbc:mysql://"
-		           +getDotenv().get("DB_HOST")+":"
-				   +getDotenv().get("DB_PORT")+"/"
-                   +getDotenv().get("DB_NAME")+"?serverTimezone=Europe/Stockholm";
-		}
-	}
+    private static class Database {
+        public static String getUrl() {
+            return "jdbc:mysql://"
+            +getDotenv().get("DB_HOST")+":"
+            +getDotenv().get("DB_PORT")+"/"
+            +getDotenv().get("DB_NAME")+"?serverTimezone=Europe/Stockholm";
+        }
+    }
 
     /**
     *   BEANS
     */
 
-	@Bean
-	public DriverManagerDataSource getDataSource() {
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		ds.setUrl(Database.getUrl());
-		ds.setUsername(getDotenv().get("DB_USER"));
-		ds.setPassword(getDotenv().get("DB_PASS"));
-		return ds;
-	}
+    @Bean
+    public DriverManagerDataSource getDataSource() {
+        DriverManagerDataSource ds = new DriverManagerDataSource();
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        ds.setUrl(Database.getUrl());
+        ds.setUsername(getDotenv().get("DB_USER"));
+        ds.setPassword(getDotenv().get("DB_PASS"));
+        return ds;
+    }
 
     @Bean
     public static Dotenv getDotenv() {
@@ -80,17 +80,16 @@ public class Config {
 
     @Bean
     public AccountDao getAccDao() {
-    	return new AccountDaoImpl(getDataSource());
+        return new AccountDaoImpl(getDataSource());
     }
 
     @Bean
     public PostDao getPostDao() {
-    	return new PostDaoImpl(getDataSource());
+        return new PostDaoImpl(getDataSource());
     }
 
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

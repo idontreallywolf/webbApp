@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AboutController extends PageController implements PageControllerInterface {
-	
-	@GetMapping("/about")
-	public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes) {
-		ModelAndView mv = new ModelAndView("index");
-		mv = initDefaultAttributes("About", null, "about", mv);		
-		return mv;
-	}
-	
+
+    @GetMapping("/about")
+    public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes) {
+        ModelAndView mv = new ModelAndView("index");
+        mv = initDefaultAttributes("About", null, "about", mv);
+        return mv;
+    }
+
 }

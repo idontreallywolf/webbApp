@@ -18,36 +18,35 @@ public class IndexController extends PageController implements PageControllerInt
     @Autowired
     PostDao postDao;
 
-	@Override
-	@GetMapping("/")
-	public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes) {
-		ModelAndView mv = new ModelAndView("index");
-		mv = initDefaultAttributes("Welcome | Pepe", null, "main", mv);
+    @Override
+    @GetMapping("/")
+    public ModelAndView run(HttpServletRequest req, HttpSession session, HttpServletResponse hsRes) {
+        ModelAndView mv = new ModelAndView("index");
+        mv = initDefaultAttributes("Welcome | Pepe", null, "main", mv);
 
-		if(session.getAttribute("sessID") != null) {
+        if(session.getAttribute("sessID") != null) {
             mv.addObject("sessID", session.getAttribute("sessID"));
-			mv.addObject("username", session.getAttribute("username"));
-		}
+            mv.addObject("username", session.getAttribute("username"));
+        }
 
-		// "all" by default
-		int category = 0;
-		if(req.getParameterMap().containsKey("category")) {
-			try {
-				category = Integer.parseInt(req.getParameter("category"));
-			} catch(NumberFormatException e) {
-				mv.addObject("posts", postDao.getPosts());
-			}
-		}
+        // "all" by default
+        int category = 0;
+        if(req.getParameterMap().containsKey("category")) {
+            try {
+                category = Integer.parseInt(req.getParameter("category"));
+            } catch(NumberFormatException e) {
+                mv.addObject("posts", postDao.getPosts());
+            }
+        }
 
-		mv.addObject("posts", postDao.getPostsByCategory(category));
+        mv.addObject("posts", postDao.getPostsByCategory(category));
+        return mv;
+    }
 
-		return mv;
-	}
-
-	@GetMapping("/error")
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView("error");
-		return mv;
-	}
+    @GetMapping("/error")
+    public ModelAndView error() {
+        ModelAndView mv = new ModelAndView("error");
+        return mv;
+    }
 
 }
