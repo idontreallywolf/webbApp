@@ -15,12 +15,14 @@ import com.webapp.dao.PostDao;
 import com.webapp.dao.PostDaoImpl;
 import com.webapp.model.Post;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 @Configuration
 @ComponentScan(basePackages = { "com.webapp.controller", "com.webapp.dao", "com.webapp.test" })
 public class Config {
 	public static String mainTitle = "PepeSite";
 	public static String rootDir = System.getProperty("user.dir");
-	
+
 	/**
 	 * Configuration for Categories
 	 * */
@@ -28,7 +30,7 @@ public class Config {
 		public static int CATEGORY_MIN = 0;
 		public static int CATEGORY_MAX = 4;
 	}
-	
+
     /**
     *   Configuration for Accounts
     */
@@ -49,14 +51,11 @@ public class Config {
     *   Database Config
     */
 	private static class Database {
-		private static String host = "127.0.0.1";
-		private static String user = "root";
-		private static String pass = "root";
-		private static String dbname = "memedb";
-		private static int port = 3306;
-
 		public static String getUrl() {
-			return "jdbc:mysql://"+host+":"+port+"/"+dbname+"?serverTimezone=Europe/Stockholm";
+			return "jdbc:mysql://"
+		           +getDotenv().get("DB_HOST")+":"
+				   +getDotenv().get("DB_PORT")+"/"
+                   +getDotenv().get("DB_NAME")+"?serverTimezone=Europe/Stockholm";
 		}
 	}
 
@@ -69,22 +68,26 @@ public class Config {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		ds.setUrl(Database.getUrl());
-		ds.setUsername(Database.user);
-		ds.setPassword(Database.pass);
+		ds.setUsername(getDotenv().get("DB_USER"));
+		ds.setPassword(getDotenv().get("DB_PASS"));
 		return ds;
 	}
 
-	
+    @Bean
+    public static Dotenv getDotenv() {
+        return Dotenv.load();
+    }
+
     @Bean
     public AccountDao getAccDao() {
     	return new AccountDaoImpl(getDataSource());
     }
-    
+
     @Bean
     public PostDao getPostDao() {
     	return new PostDaoImpl(getDataSource());
     }
-    
+
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
